@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+
+
+</head>
+<body class="gray-bg">
+
+
+<section>
+
+
+    <div class="form-col">
+    <div class="form-row">
+        <label><i class="iconfont icon-shouji"></i></label>
+        <input type="text" placeholder="请输入您的手机号码" />
+    </div>
+
+    <div class="form-row">
+        <label><i class="iconfont icon-yanzhengma"></i></label>
+        <input type="text" placeholder="请输入验证码" />
+        <span class="get-code">获取验证码</span>
+    </div>
+
+    </div>
+
+    <div class="link-col clearfix">
+        <a href="forgetPass.html">忘记密码？</a>
+        <a href="login.html">密码登录</a>
+    </div>
+
+    <div class="big-btn-col">
+    <div class="big-btn" style="font-size:30px;" id="login">登录</div>
+    </div>
+
+
+
+
+</section>
+
+<script src="js/zepto.min.js"></script>
+
+<script>
+
+    $("#login").click(function()
+    {
+        $("body").append("853028530853805");
+        window.myObj.fun1FromAndroid("哈哈哈哈哈哈哈");
+
+    });
+
+    function funFromjs()
+    {
+        $("body").append("测试测试");
+        alert(2);
+    }
+
+</script>
+
+</body>
+</html>
