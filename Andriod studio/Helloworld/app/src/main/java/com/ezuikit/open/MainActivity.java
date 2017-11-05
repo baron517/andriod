@@ -21,6 +21,13 @@ import com.ezvizuikit.open.EZUIPlayer;
 import com.videogo.openapi.EZOpenSDK;
 import android.util.Log;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import static android.R.attr.password;
 import static com.ezuikit.open.PlayActivity.APPKEY;
 import static com.ezuikit.open.PlayActivity.AccessToekn;
 import static com.ezuikit.open.PlayActivity.Global_AreanDomain;

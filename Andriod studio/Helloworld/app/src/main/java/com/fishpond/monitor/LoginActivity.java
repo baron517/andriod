@@ -1,8 +1,10 @@
-package com.example.administrator.monitor;
+package com.fishpond.monitor;
+
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,9 +15,11 @@ import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.Toast;
 
-import layout.page.DeviceListActivity;
+import com.ezuikit.open.R;
+import com.fishpond.monitor.DeviceListActivity;
 
-public class MainActivity extends AppCompatActivity {
+
+public class LoginActivity extends AppCompatActivity {
 
     private WebView webView;
     private Button mBtn1;
@@ -29,12 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
         Log.w("test","hahahaha");
         System.out.println("hahahaha");
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         init();
-        Log.w("###","hahahaha");
-        System.out.println("hahahaha");
-
-
 
 
 
@@ -60,7 +60,10 @@ public class MainActivity extends AppCompatActivity {
         //WebView加载web资源
 
         //webView.loadUrl("file:///android_asset/index.html");
-        webView.loadUrl("http://monitor.pro.youzewang.com/app/assets/deviceList.html");
+
+        String serve_url=this.getString(R.string.serve_url);
+
+        webView.loadUrl(serve_url+"index.html");
 
         //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
         webView.setWebViewClient(new WebViewClient(){
@@ -99,8 +102,23 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @JavascriptInterface
-        public void fun1FromAndroid(String name) {
-            Toast.makeText(mContxt, name, Toast.LENGTH_LONG).show();
+        public void fun1FromAndroid(String data) {
+
+            Log.w("test","测试测试");
+
+            Log.w("test",data);
+
+            //获取SharedPreferences对象
+            Context ctx = LoginActivity.this;
+            SharedPreferences sp = ctx.getSharedPreferences("taidun", MODE_PRIVATE);
+            //存入数据
+            SharedPreferences.Editor editor = sp.edit();
+            editor.putString("STRING_KEY", data);
+            editor.commit();
+
+            //返回STRING_KEY的值
+            Log.w("test", sp.getString("STRING_KEY", "none"));
+
 
             // 给bnt1添加点击响应事件
             Intent intent =new Intent(mContxt,DeviceListActivity.class);
@@ -109,9 +127,9 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        public void fun2(String name) {
-            Log.d("test","hahahaha");
-            Toast.makeText(mContxt, "调用fun2:" + name, Toast.LENGTH_SHORT).show();
+        @JavascriptInterface
+        public void toast(String name) {
+            Toast.makeText(mContxt, name, Toast.LENGTH_SHORT).show();
         }
     }
 

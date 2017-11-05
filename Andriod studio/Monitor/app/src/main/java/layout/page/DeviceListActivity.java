@@ -1,21 +1,19 @@
-package com.example.administrator.monitor;
+package layout.page;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.webkit.JavascriptInterface;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
-import android.widget.Toast;
 
-import layout.page.DeviceListActivity;
+import com.example.administrator.monitor.R;
 
-public class MainActivity extends AppCompatActivity {
+
+public class DeviceListActivity extends AppCompatActivity {
 
     private WebView webView;
     private Button mBtn1;
@@ -34,15 +32,10 @@ public class MainActivity extends AppCompatActivity {
         Log.w("###","hahahaha");
         System.out.println("hahahaha");
 
-
-
-
-
     }
 
     @SuppressLint({ "JavascriptInterface", "SetJavaScriptEnabled" })
     private void init(){
-
         webView = (WebView) findViewById(R.id.webview);
         /*mBtn1 = (Button) findViewById(R.id.btn_1);*/
         mContext = getApplicationContext();
@@ -60,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         //WebView加载web资源
 
         //webView.loadUrl("file:///android_asset/index.html");
-        webView.loadUrl("http://monitor.pro.youzewang.com/app/assets/deviceList.html");
+        webView.loadUrl("http://monitor.pro.youzewang.com/app/assets/modifyPass.html");
 
         //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
         webView.setWebViewClient(new WebViewClient(){
@@ -91,29 +84,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    public class JavaScriptObject {
-        Context mContxt;
-
-        public JavaScriptObject(Context mContxt) {
-            this.mContxt = mContxt;
-        }
-
-        @JavascriptInterface
-        public void fun1FromAndroid(String name) {
-            Toast.makeText(mContxt, name, Toast.LENGTH_LONG).show();
-
-            // 给bnt1添加点击响应事件
-            Intent intent =new Intent(mContxt,DeviceListActivity.class);
-            //启动
-            startActivity(intent);
-
-        }
-
-        public void fun2(String name) {
-            Log.d("test","hahahaha");
-            Toast.makeText(mContxt, "调用fun2:" + name, Toast.LENGTH_SHORT).show();
-        }
-    }
 
 
 }

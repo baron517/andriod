@@ -1,5 +1,6 @@
 package com.example.administrator.monitor;
 
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -15,7 +16,8 @@ import android.widget.Toast;
 
 import layout.page.DeviceListActivity;
 
-public class MainActivity extends AppCompatActivity {
+
+public class LoginActivity extends AppCompatActivity {
 
     private WebView webView;
     private Button mBtn1;
