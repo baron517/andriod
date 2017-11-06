@@ -2,6 +2,7 @@ package com.ezuikit.open;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -115,15 +116,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
         }
         getDefaultParams();
 
+
+
+
     }
 
     @Override
     public void onClick(View view) {
-
-        Toast.makeText(this, "测试测试" ,Toast.LENGTH_SHORT).show();
-
-        System.out.println("测试测试");
-        Log.w("TGA","ceshi测试测试");
 
 
         if (view == mButtonCode) {
@@ -134,10 +133,26 @@ public class MainActivity extends Activity implements View.OnClickListener {
             //弹出清除数据确认框
             showClearDialog();
         } else if(view == mButtonPlay){
-            mAppKey = mAppkeyEditText.getText().toString().trim();
-            mAccessToken = mAccessTokenEditText.getText().toString().trim();
-            mUrl = mUrlEditText.getText().toString().trim();
+
+            Context ctx = MainActivity.this;
+            SharedPreferences sp = ctx.getSharedPreferences("videoParam", MODE_PRIVATE);
+
+            Log.w("参数mAppKey", sp.getString("mAppKey", "none"));
+            Log.w("参数mAccessToken", sp.getString("mAccessToken", "none"));
+            Log.w("参数mUrl", sp.getString("mUrl", "none"));
+
+            mAppKey = sp.getString("mAppKey", "none");
+            //mAccessToken = sp.getString("mAccessToken", "none");
+            mUrl = sp.getString("mUrl", "none");
+
+            mAccessToken = "at.0wrc404u09taazs24196ivij8jvhesbn-3d1zsmncne-1bp5j6t-ya3ipiuur";
+
+
             mGlobalAreaDomain = mGlobalAreanDoaminEditText.getText().toString().trim();
+
+
+            Log.w("参数1", mGlobalAreaDomain);
+
             if (TextUtils.isEmpty(mAppKey)){
                 Toast.makeText(this,"appkey can not be null",Toast.LENGTH_LONG).show();
                 return;
@@ -157,9 +172,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 }
             }
             saveDefaultParams();
-            //mAppKey = "0f74e3ed04794788a1b2ac9e45109031";
-            //mAccessToken = "ra.2p1gawd41hludifdaa1tknxbaaertds1-26inilry6p-1bwus1o-p7nnz4jen";
-            //mUrl = "ezopen://open.ys7.com/737959033/1.live";
 
             EZUIPlayer.EZUIKitPlayMode mode = null;
             mode = EZUIPlayer.getUrlPlayType(mUrl);
@@ -172,10 +184,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     //应用内只能初始化一次，当首次选择了国内或者海外版本，并点击进入预览回放，此时不能再进行国内海外切换
                     return;
                 }
-
-                Log.w("TGA",mAppKey);
-                Log.w("TGA",mAccessToken);
-                Log.w("TGA",mUrl);
 
                 //启动播放页面
                 PlayActivity.startPlayActivity(this, mAppKey, mAccessToken, mUrl);

@@ -54,6 +54,8 @@
 
         <activity android:name=".DeviceListActivity"></activity>
 
+        <activity android:name=".ModifyPassActivity"></activity>
+
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

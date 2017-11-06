@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>设备列表</title>
+    <link rel="stylesheet" type="text/css" href="css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css?v=4"/>
+    <script src="lib/jquery.js"></script>
+    <script src="js/common.js?v=1"></script>
+
+</head>
+<body>
+
+
+<header class="header">
+    
+    
+    
+    监控列表
+    
+    <span class="right" id="modifyPass"><i class="aui-iconfont aui-icon-edit"></i></span>
+    
+    
+</header>
+<div class="header-space"></div>
+
+
+<section class="main">
+
+    <ul class="device-list" id="deviceList">
+        
+       
+        
+        
+        
+    </ul>
+
+   
+
+
+
+</section>
+
+
+<script>
+
+
+    $(function()
+    {
+         var userObj=JSON.parse(window.myObj.getUserInfo().trim());
+    
+    
+      $.ajax({
+               type: "GET",
+               url: serveUrl+"g=Api&m=App&a=getParam",
+               dataType:"json",
+               success: function(data){
+                   
+                   if(data)
+                   {
+                       window.myObj.saveAppData(data.appKey,data.accessToken);
+                   }
+                   
+               }
+               
+      });
+    
+    
+    $("#modifyPass").click(function()
+    {
+        //window.myObj.toast("点击");
+        window.myObj.modifyPass();
+    });
+    
+
+    $.ajax({
+               type: "GET",
+               url: serveUrl+"g=Api&m=App&a=getDeviceList",
+               data: {"m_id":userObj.m_id},
+               dataType:"json",
+               success: function(data){
+                   
+                   if(data.length>0)
+                   {
+                       var html=""
+                       for(var i=0;i<data.length;i++)
+                       {
+                           html=html+' <li data-url="'+data[i].d_video+'">'+
+                                        '<img src="'+domainUrl+'data/upload/'+data[i].img+'" />'+
+                                        '<div class="right">'+
+                                            '<div>设备序列:'+data[i].d_id+'</div>'+
+                                            '<div>设备名称：'+data[i].name+'</div>'+
+                                            '<div>创建时间：'+data[i].d_create_time+'</div>'+
+                                        '</div>'+
+                                    '</li>';
+                       }
+                       
+                       $("#deviceList").append(html);
+                       
+                       
+                       $("#deviceList li").click(function()
+                       {
+                           window.myObj.fun1FromAndroid($(this).attr("data-url"));
+                       });
+                       
+                       
+                   }
+                   
+                   //window.myObj.toast(JSON.stringify(data));
+                      
+                   
+                        
+                }
+            });
+        
+    });
+
+   
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>登录</title>
+    <link rel="stylesheet" type="text/css" href="css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css?v=1"/>
+    <script src="lib/jquery.js"></script>
+    <script src="js/common.js"></script>
+
+</head>
+<body>
+
+<header class="header">
+    
+    泰盾智联
+    
+</header>
+<div class="header-space"></div>
+
+
+<section class="main">
+
+
+    <img style="display:block;margin:0 auto;padding-top:1rem;padding-bottom:0.8rem;" src="img/logo.png"/>
+
+    <div class="form-col">
+        
+    <div class="form-row">
+        <label><i class="aui-iconfont aui-icon-mobile"></i></label>
+        <input type="text" id="phone" value="" placeholder="请输入您的手机号码" />
+    </div>
+
+    <div class="form-row">
+        <label><i class="aui-iconfont aui-icon-lock"></i></label>
+        <input type="password" id="password" value="" placeholder="请输入密码" />
+        
+    </div>
+
+    </div>
+
+    <div class="big-btn-col">
+    <div class="big-btn"  id="login">登录</div>
+    </div>
+
+
+
+
+</section>
+
+
+<script>
+
+
+    $("#login").click(function()
+    {
+        
+        
+        if($("#phone").val()=="")
+        {
+            window.myObj.toast("手机号码不能为空！");
+            return;
+        }
+        
+         if($("#password").val()=="")
+        {
+            window.myObj.toast("密码不能为空！");
+            return;
+        }
+        
+        
+         $.ajax({
+               type: "POST",
+               url: serveUrl+"g=Api&m=App&a=login",
+               data: {"phone":$("#phone").val(),"password":$("#password").val()},
+               dataType:"json",
+               success: function(data){
+                   
+                   
+                       
+                   
+                       if(data)
+                       {
+                            window.myObj.toast("登录成功！");
+                            window.myObj.fun1FromAndroid(JSON.stringify(data));
+                            
+                       }
+                       else
+                       {
+                            window.myObj.toast("手机号码或者密码不正确！");
+                       }
+                   
+                        
+                }
+            });
+        
+        
+        
+        
+        
+
+    });
+
+    function funFromjs()
+    {
+        $("body").append("测试测试");
+        alert(2);
+    }
+
+</script>
+
+</body>
+</html>

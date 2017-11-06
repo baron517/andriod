@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>修改密码</title>
+    <link rel="stylesheet" type="text/css" href="css/aui.css"/>
+    <link rel="stylesheet" type="text/css" href="css/main.css"/>
+    <script src="lib/jquery.js"></script>
+    <script src="js/common.js"></script>
+
+</head>
+<body>
+
+
+<header class="header">
+    
+    <span class="left" id="goBack"><i class="aui-iconfont aui-icon-left"></i></span>
+    
+    修改密码
+    
+    
+</header>
+<div class="header-space"></div>
+
+<section class="main">
+
+    <div class="form-col">
+        
+<!--    <div class="form-row">
+        <label> <i class="aui-iconfont aui-icon-mobile"></i></label>
+        <input type="text" placeholder="请输入您的手机号码" />
+    </div>-->
+
+    <div class="form-row">
+        <label><i class="aui-iconfont aui-iconfont aui-icon-unlock" style="left:0.2rem;"></i></label>
+        <input type="password" id="password" placeholder="请输入新密码" />
+        
+    </div>
+    
+     <div class="form-row">
+        <label><i class="aui-iconfont aui-icon-lock"></i></label>
+        <input type="password" id="confirmPass" placeholder="请再次输入新密码" />
+        
+    </div>
+    
+
+    </div>
+
+    <div class="big-btn-col">
+    <div class="big-btn"  id="submitBtn">提交</div>
+    </div>
+
+
+
+
+</section>
+
+
+<script>
+
+
+     var userObj=JSON.parse(window.myObj.getUserInfo().trim());
+     
+     //window.myObj.toast(userObj.id);
+
+
+    $("#goBack").click(function()
+    {
+        
+        window.myObj.fun1FromAndroid();
+        
+    });
+
+    $("#submitBtn").click(function()
+    {
+        
+        if($("#password").val()=="")
+        {
+            window.myObj.toast("密码不能为空！");
+            return;
+        }
+        
+        if($("#confirmPass").val()=="")
+        {
+            window.myObj.toast("确认密码不能为空！");
+            return;
+        }
+        
+        
+        if($("#confirmPass").val()!=$("#password").val())
+        {
+            window.myObj.toast("两次密码不一致！");
+            return;
+        }
+        
+        
+          $.ajax({
+               type: "POST",
+               url: serveUrl+"g=Api&m=App&a=modifyPass",
+               dataType:"json",
+               data:{password:$("#password").val(),id:userObj.id},
+               success: function(data){
+                   
+                   if(data=="1")
+                   {
+                       $("#password").val("");
+                       $("#confirmPass").val("");
+                       window.myObj.toast("修改成功！"); 
+                   }
+                   else
+                   {
+                      window.myObj.toast("修改失败！");  
+                   }
+                   
+               }
+               
+      });
+        
+        
+
+    });
+
+   
+
+</script>
+
+</body>
+</html>
