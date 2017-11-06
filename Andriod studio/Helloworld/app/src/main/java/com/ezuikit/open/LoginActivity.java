@@ -1,4 +1,4 @@
-package com.fishpond.monitor;
+package com.ezuikit.open;
 
 
 import android.annotation.SuppressLint;
@@ -14,9 +14,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.Toast;
-
-import com.ezuikit.open.R;
-import com.fishpond.monitor.DeviceListActivity;
 
 
 public class LoginActivity extends AppCompatActivity {

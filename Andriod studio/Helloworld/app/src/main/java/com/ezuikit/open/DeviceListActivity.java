@@ -1,4 +1,4 @@
-package com.fishpond.monitor;
+package com.ezuikit.open;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -13,8 +13,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 import android.widget.Toast;
-
-import com.ezuikit.open.R;
 
 
 public class DeviceListActivity extends AppCompatActivity {
@@ -33,10 +31,6 @@ public class DeviceListActivity extends AppCompatActivity {
         System.out.println("hahahaha");
         setContentView(R.layout.activity_device_list);
         init();
-
-        Context ctx = DeviceListActivity.this;
-        SharedPreferences sp = ctx.getSharedPreferences("taidun", MODE_PRIVATE);
-        Log.w("test", sp.getString("STRING_KEY", "none"));
 
 
     }
@@ -87,14 +81,45 @@ public class DeviceListActivity extends AppCompatActivity {
 
             @JavascriptInterface
             public void fun1FromAndroid(String name) {
-                Toast.makeText(mContxt, name, Toast.LENGTH_LONG).show();
+
 
                 // 给bnt1添加点击响应事件
-                Intent intent =new Intent(mContxt,DeviceListActivity.class);
+                Intent intent =new Intent(mContxt,MainActivity.class);
                 //启动
                 startActivity(intent);
 
             }
+
+            @JavascriptInterface
+            public void saveAppData(String data) {
+
+
+                //获取SharedPreferences对象
+                Context ctx = DeviceListActivity.this;
+                SharedPreferences sp = ctx.getSharedPreferences("taidunApp", MODE_PRIVATE);
+                //存入数据
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putString("taidunApp", data);
+                editor.commit();
+
+                //返回STRING_KEY的值
+                Log.w("test", sp.getString("taidunApp", "none"));
+
+
+            }
+
+
+
+            @JavascriptInterface
+            public String getUserInfo()
+            {
+                Context ctx = DeviceListActivity.this;
+                SharedPreferences sp = ctx.getSharedPreferences("taidun", MODE_PRIVATE);
+                String userInfo=sp.getString("STRING_KEY", "none");
+                Log.w("test", sp.getString("STRING_KEY", "none"));
+                return userInfo;
+            }
+
 
             @JavascriptInterface
             public void toast(String name) {

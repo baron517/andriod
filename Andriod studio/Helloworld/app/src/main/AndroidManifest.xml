@@ -52,9 +52,9 @@
             android:exported="false"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
 
-        <activity android:name="com.fishpond.monitor.DeviceListActivity"></activity>
+        <activity android:name=".DeviceListActivity"></activity>
 
-        <activity android:name="com.fishpond.monitor.LoginActivity">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
