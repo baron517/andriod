@@ -66,6 +66,7 @@ public class DeviceListActivity extends AppCompatActivity {
         //WebView加载web资源
 
         //webView.loadUrl("file:///android_asset/index.html");
+        //String serve_url=this.getString(R.string.serve_url);
         String serve_url=this.getString(R.string.serve_url);
 
         webView.loadUrl(serve_url+"deviceList.html");

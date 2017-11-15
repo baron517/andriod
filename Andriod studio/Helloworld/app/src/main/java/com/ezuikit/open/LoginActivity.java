@@ -58,8 +58,9 @@ public class LoginActivity extends AppCompatActivity {
 
         //webView.loadUrl("file:///android_asset/index.html");
 
-        String serve_url=this.getString(R.string.serve_url);
+        //String serve_url=this.getString(R.string.serve_url);
 
+        String serve_url=this.getString(R.string.serve_url);
         webView.loadUrl(serve_url+"index.html");
 
         //覆盖WebView默认使用第三方或系统默认浏览器打开网页的行为，使网页用WebView打开
